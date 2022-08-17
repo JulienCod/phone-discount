@@ -8,7 +8,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 #[Route('/api', name:'api_main')]
 class PhonesController extends AbstractController
@@ -45,6 +47,7 @@ class PhonesController extends AbstractController
                     'stock'=>$phone->getStock(),
                     'price' => $phone->getPrice(),
                     'promotion' => $phone->getPromotion(),
+                    'imageName'=>$phone->getImageName(),
                     // 'is_active' => $phone->getIsActive(),
                 ];
             }
@@ -57,10 +60,9 @@ class PhonesController extends AbstractController
          * @param Request $request
          * @return Response
          */
-        #[Route('/phone', name: 'phone_new', methods: ['POST'])]
-        public function new(Request $request): Response
+        #[Route('/phone', name: 'phone_create', methods: ['POST'])]
+        public function create(Request $request): Response
         {
-            $em = $this->doctrine->getManager();
             $phone = new Phones();
             $phone->setBrand($request->request->get('brand'));
             $phone->setDescription($request->request->get('description'));
@@ -71,9 +73,9 @@ class PhonesController extends AbstractController
             $phone->setPrice($request->request->get('price'));
             $phone->setPromotion($request->request->get('promotion'));
             $phone->setIsActive($request->request->get('is_active'));
-            $em->persist($phone);
-            $em->flush();
-    
+            $phone->setImageFile($request->files->get('imageName'));
+            $this->entityManager->persist($phone);
+            $this->entityManager->flush();
             return $this->json('Created new phone successfully');
         }
     
@@ -98,7 +100,8 @@ class PhonesController extends AbstractController
                 'stock'=>$phone->getStock(),
                 'price' => $phone->getPrice(),
                 'promotion' => $phone->getPromotion(),
-                'is_active' => $phone->getIsActive(),
+                'is_active' => $phone->isIsActive(),
+                'imageName'=>$phone->getImageName(),
             ];
             return $this->json($data);
         }
@@ -124,6 +127,7 @@ class PhonesController extends AbstractController
             $phone->setPrice($content->price);
             $phone->setPromotion($content->promotion);
             $phone->setIsActive($content->isActive);
+            $phone->setImageName($content->imageName);
             $this->entityManager->flush();
             
             $data[] = [
