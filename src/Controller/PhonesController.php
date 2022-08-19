@@ -4,27 +4,22 @@ namespace App\Controller;
 
 use App\Entity\Phones;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-#[Route('/api', name:'api_main')]
+#[Route('/api', name:'api_main_')]
 class PhonesController extends AbstractController
 {
     
         private $entityManager;
-        private $doctrine;
     
         public function __construct(
             EntityManagerInterface $entityManager,
-            ManagerRegistry $doctrine,
         ) {
             $this->entityManager = $entityManager;
-            $this->doctrine = $doctrine;
         }
         /**
          * get phones
@@ -86,7 +81,7 @@ class PhonesController extends AbstractController
         public function show(Request $request): Response
         {
             $id = (['id' => $request->get('id')]);
-            $phone = $this->doctrine->getRepository(Phones::class)->find($id);
+            $phone = $this->entityManager->getRepository(Phones::class)->find($id);
             if (!$phone) {
                 return $this->json('No phone found for id ' . $id, 404);
             }
@@ -113,7 +108,7 @@ class PhonesController extends AbstractController
         public function edit(Request $request): Response
         {
             $id = (['id' => $request->get('id')]);
-            $phone = $this->doctrine->getRepository(Product::class)->find($id);
+            $phone = $this->entityManager->getRepository(Product::class)->find($id);
             if (!$phone) {
                 return $this->json('No phone found for id ' . $id, 404);
             }
@@ -152,12 +147,12 @@ class PhonesController extends AbstractController
         public function delete(Request $request): Response
         {
             $id = (['id' => $request->get('id')]);
-            $phone = $this->doctrine->getManager()->getRepository(Phones::class)->find($id);
+            $phone =$this->entityManager->getRepository(Phones::class)->find($id);
             if (!$phone) {
                 return $this->json('No phone found for id ' . $id, 404);
             }
-            $this->doctrine->getManager()->remove($phone);
-            $this->doctrine->getManager()->flush();
+            $this->entityManager->remove($phone);
+            $this->entityManager->flush();
     
             return $this->json('Deleted a phone successfully');
         }

@@ -10,7 +10,6 @@ export default function PhoneShow() {
     useEffect(() => {
         axios.get(`/api/phone/${id}`)
             .then(function (response) {
-                console.log(response);
                 setPhone(response.data[0]);
             })
             .catch(function (error) {
@@ -25,7 +24,6 @@ export default function PhoneShow() {
 
     const addPanier = (event) => {
         event.preventDefault();
-        console.log(phone);
     }
 
     return (

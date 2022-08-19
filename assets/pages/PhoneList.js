@@ -34,19 +34,19 @@ export default function PhoneList() {
                 </h2>
             </div>
             <div className="">
-                    <Link className="" to="/create">
-                        Créer un nouveau téléphone
-                    </Link>
-                </div>
+                <Link className="" to="/create">
+                    Créer un nouveau téléphone
+                </Link>
+            </div>
             <div className="list__phone">
                 {phoneList.map((phone, key) => {
                     return (
                         <div className="item" key={key}>
-                                <Link className="" to={`/show/${phone.id}`}>
-                            <div className="item__img">
+                            <Link className="" to={`/show/${phone.id}`}>
+                                <div className="item__img">
                                     <img src={`http://localhost:8000/images/phone/${phone.imageName}`} alt="image téléphone" />
-                            </div>
-                                </Link>
+                                </div>
+                            </Link>
                             <div className='item__content'>
                                 <h3 className="item__title">
                                     <span>

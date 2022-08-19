@@ -58,6 +58,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->createdAt= new \DateTimeImmutable();
+        $this->updatedAt= new \DateTimeImmutable();
         $this->command = new ArrayCollection();
     }
 
@@ -86,6 +88,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
+    }
+
+        /**
+     *
+     * @return string
+     */
+    public function getUsername(): string{
+        return $this->getUserIdentifier();
     }
 
     /**
