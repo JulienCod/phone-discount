@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
+
 /**
  * Déconnexion (suppression du token du sessionStorage et sur Axios)
  */
@@ -29,7 +30,7 @@ function authenticate(user) {
  * Récupère le roles du l'utilisateur connecté
  * @returns roles 
  */
-function rolesCurrentUser(){
+function rolesCurrentUser() {
     // récupère le token présent dans le local de session
     let token = window.sessionStorage.getItem("token");
     // décode le token pour récupérer le roles de l'utilisateur connecté

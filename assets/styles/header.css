@@ -12,6 +12,9 @@ header{
     display: flex;
     gap:1rem;
 }
+.header__link{
+    text-decoration: none;
+}
 .icons_header{
     font-size: 1.5rem;
     cursor: pointer;

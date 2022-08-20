@@ -5,7 +5,7 @@ import CreateAccount from '../components/form/create/CreateAccount';
 export default function Account() {
 
     const [newAccount, setNewAccount] = useState();
-    const [connectAccount, setConnectAccount] = useState();
+    const [connectAccount, setConnectAccount] = useState(true);
 
     return (
         <article className="container">

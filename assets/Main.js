@@ -8,6 +8,7 @@ import Account from './pages/Account';
 import PhoneCreate from './pages/PhoneCreate';
 import PhoneList from './pages/PhoneList';
 import PhoneShow from './pages/PhoneShow';
+import Basket from './pages/basket';
 
 
 AuthAPI.setup();
@@ -23,16 +24,17 @@ function Main() {
                 setIsAuthenticated
             }}
         >
-            <Layout>
-                <Router>
+            <Router>
+                <Layout>
                     <Routes>
                         <Route path="/" element={<PhoneList />} />
                         <Route path="/create" element={<PhoneCreate />} />
                         <Route path="/show/:id" element={<PhoneShow />} />
-                        <Route path="/account" element={<Account />} />
+                        <Route path="/account" element={<Account />} /> 
+                        <Route path="/basket" element={<Basket />} /> 
                     </Routes>
-                </Router>
-            </Layout>
+                </Layout>
+            </Router>
         </AuthContext.Provider>
     )
 }

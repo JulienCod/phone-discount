@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/header.css';
 import { RiAccountCircleLine, RiShoppingBasketLine } from 'react-icons/Ri'
 import { BiArrowBack } from 'react-icons/Bi'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export default function Header() {
 
 
@@ -15,18 +15,22 @@ export default function Header() {
                     }} />
                 </div>
                 <div>
-                    <h1>Phone Discount</h1>
+                    <Link className='header__link' to='/'>
+                        <h1>Phone Discount</h1>
+                    </Link>
                 </div>
-                <div className="container__icons">
+                <nav className="container__icons">
                     <div>
-                        {/* <Link to="/account"> */}
+                        <Link className='header__link' to="/account">
                             <RiAccountCircleLine className="icons_header" />
-                        {/* </Link> */}
+                        </Link>
                     </div>
                     <div>
-                        <RiShoppingBasketLine className="icons_header" />
+                        <Link className='header__link' to="/basket">
+                            <RiShoppingBasketLine className="icons_header" />
+                        </Link>
                     </div>
-                </div>
+                </nav>
             </div>
         </header>
     )

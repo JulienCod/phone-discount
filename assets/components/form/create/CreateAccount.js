@@ -1,12 +1,11 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import usersApi from '../../../services/usersApi';
 
 export default function CreateAccount() {
 
-    const handleSave = (user) => {
+    const handleSave = async (user) => {
 
         const formData = new FormData();
         formData.append('email', user.email);
@@ -16,23 +15,22 @@ export default function CreateAccount() {
         formData.append('address', user.address);
         formData.append('postal_code', user.postal_code);
         formData.append('rgpd', user.rgpd);
-        axios.post('/api/user', formData)
-            .then(function (response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Utilisateur créé avec succès!',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-            })
-            .catch(function (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Une erreur s\'est produite',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
+        try {
+            await usersApi.register(formData);
+            Swal.fire({
+                icon: 'success',
+                title: 'Vous êtes désormais inscrit, vous pouvez vous connecter !',
+                showConfirmButton: false,
+                timer: 1500,
             });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Une erreur est survenue',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }
     };
     const { register, handleSubmit, formState: { errors } } = useForm({
         // resolver: joiResolver(?Schema)
@@ -54,62 +52,84 @@ export default function CreateAccount() {
             <h2>Créer un compte</h2>
 
             <div className="input__field">
-                <input
-                    type="email"
-                    placeholder="Adresse email"
-                    {...register("email")} />
-                <span className="input__error">{errors.email?.message}</span>
+                <label htmlFor='email'>
+                    <input
+                        id='email'
+                        type="email"
+                        placeholder="Adresse email"
+                        {...register("email")} />
+                    <span className="input__error">{errors.email?.message}</span>
+                </label>
             </div>
 
             <div className="input__field">
-                <input
-                    type="password"
-                    placeholder="Mot de passe"
-                    {...register("password")} />
-                <span className="input__error">{errors.password?.message}</span>
+                <label htmlFor='password'>
+                    <input
+                        id='password'
+                        type="password"
+                        placeholder="Mot de passe"
+                        {...register("password")} />
+                    <span className="input__error">{errors.password?.message}</span>
+                </label>
             </div>
 
             <div className="input__field">
-                <input
-                    type="text"
-                    placeholder="Nom"
-                    {...register("firstname")} />
-                <span className="input__error">{errors.firstname?.message}</span>
+                <label htmlFor='firstname'>
+                    <input
+                        id='firstname'
+                        type="text"
+                        placeholder="Nom"
+                        {...register("firstname")} />
+                    <span className="input__error">{errors.firstname?.message}</span>
+                </label>
             </div>
 
             <div className="input__field">
-                <input
-                    type="text"
-                    placeholder="Prénom"
-                    {...register("lastname")} />
-                <span className="input__error">{errors.lastname?.message}</span>
+                <label htmlFor='lastname'>
+                    <input
+                        id='lastname'
+                        type="text"
+                        placeholder="Prénom"
+                        {...register("lastname")} />
+                    <span className="input__error">{errors.lastname?.message}</span>
+                </label>
             </div>
 
             <div className="input__field">
-                <input
-                    type="text"
-                    placeholder="Adresse postale"
-                    {...register("address")}
-                />
-                <span className="input__error">{errors.address?.message}</span>
+                <label htmlFor='address'>
+                    <input
+                        id='address'
+                        type="text"
+                        placeholder="Adresse postale"
+                        {...register("address")}
+                    />
+                    <span className="input__error">{errors.address?.message}</span>
+                </label>
             </div>
 
             <div className="input__field">
-                <input
-                    type="number"
-                    placeholder="Code postal"
-                    {...register("postal_code")}
-                />
-                <span className="input__error">{errors.postal_code?.message}</span>
+                <label htmlFor='postal_code'>
+                    <input
+                        id='postal_code'
+                        type="number"
+                        placeholder="Code postal"
+                        {...register("postal_code")}
+                    />
+                    <span className="input__error">{errors.postal_code?.message}</span>
+                </label>
             </div>
 
             <div className="input__field">
-                <input
-                    type="checkbox"
-                    placeholder="RGPD"
-                    {...register("rgpd")}
-                />
-                <span className="input__error">{errors.rgpd?.message}</span>
+                <label htmlFor='rgpd'>
+                    RGPD :
+                    <input
+                        id='rgpd'
+                        type="checkbox"
+                        placeholder="RGPD"
+                        {...register("rgpd")}
+                    />
+                    <span className="input__error">{errors.rgpd?.message}</span>
+                </label>
             </div>
 
             <div>

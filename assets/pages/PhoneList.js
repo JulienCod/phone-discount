@@ -34,7 +34,12 @@ export default function PhoneList() {
                 setPhoneList(response.data);
             })
             .catch(function (err) {
-                console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Une erreur est survenue',
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
             });
     }
 

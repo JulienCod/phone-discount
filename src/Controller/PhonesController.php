@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -55,6 +56,7 @@ class PhonesController extends AbstractController
          * @param Request $request
          * @return Response
          */
+        #[IsGranted('ROLE_ADMIN')]
         #[Route('/phone', name: 'phone_create', methods: ['POST'])]
         public function create(Request $request): Response
         {
@@ -104,6 +106,7 @@ class PhonesController extends AbstractController
         /**
          * update a phone
          */
+        #[IsGranted('ROLE_ADMIN')]
         #[Route('/phone/{id}', name: 'phone_edit', methods: ['PUT', 'PATCH'])]
         public function edit(Request $request): Response
         {
@@ -143,6 +146,7 @@ class PhonesController extends AbstractController
         /**
          * delete a phone
          */
+        #[IsGranted('ROLE_ADMIN')]
         #[Route('/phone/{id}', name: 'phone_delete', methods: ['DELETE'])]
         public function delete(Request $request): Response
         {

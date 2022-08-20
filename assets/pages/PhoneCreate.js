@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import phoneApi from '../services/phoneApi';
 // import { joiResolver } from '@hookform/resolvers/joi';
 
 
 export default function PhoneCreate() {
 
-  const handleSave = (phone, image) => {
-    
+  const handleSave = async (phone, image) => {
     const formData = new FormData();
     formData.append('imageName', image);
     formData.append('brand', phone.brand);
@@ -21,24 +20,22 @@ export default function PhoneCreate() {
     formData.append('price', phone.price);
     formData.append('promotion', phone.promotion);
     formData.append('is_active', phone.is_active);
-    axios.post('/api/phone', formData)
-      .then(function (response) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Téléphone créé avec succès!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch(function (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Une erreur s\'est produite',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setIsSaving(false);
+    try {
+      await phoneApi.create(formData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Téléphone créé avec succès!',
+        showConfirmButton: false,
+        timer: 1500,
       });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Une erreur est survenue',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");

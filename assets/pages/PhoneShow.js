@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
 import '../styles/PhoneShow.css';
+import phoneApi from '../services/phoneApi';
 
 export default function PhoneShow() {
     const [id, setId] = useState(useParams().id);
-    const [phone, setPhone] = useState({ brand: '', color: '', description: '', model: '', price: 0, promotion: 0, stock: 0, storage: 0, imageName:'' });
+    const [phone, setPhone] = useState({ brand: '', color: '', description: '', model: '', price: 0, promotion: 0, stock: 0, storage: 0, imageName: '' });
+    const [quantity, setQuantity] = useState();
 
     useEffect(() => {
         axios.get(`/api/phone/${id}`)
@@ -13,7 +17,12 @@ export default function PhoneShow() {
                 setPhone(response.data[0]);
             })
             .catch(function (error) {
-                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Une erreur est survenue',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
             });
     }, []);
 
@@ -64,15 +73,17 @@ export default function PhoneShow() {
                             }
                         </p>
                     </div>
-                    <form className='form'>
+                    <form className='form' >
                         <div>
-                            <select id="quantity-choice">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            <label htmlFor='quantity'>Quantitée :
+                                <select id="quantity">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </label>
                         </div>
                         <div>
                             <button onClick={addPanier}>Ajouter au panier</button>
