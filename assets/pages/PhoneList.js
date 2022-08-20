@@ -1,11 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../styles/PhoneList.css'
+import '../styles/PhoneList.css';
+import AuthAPI from '../services/authApi';
+import AuthContext from '../context/AuthContext';
+
 
 
 export default function PhoneList() {
     const [phoneList, setPhoneList] = useState([]);
+    const { isAuthenticated } = useContext(AuthContext);
+
+    const [admin, setAdmin] = useState(false);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            let user = AuthAPI.rolesCurrentUser();
+            if (user === "ROLE_ADMIN") {
+                setAdmin(true);
+            }else{
+                setAdmin(false);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         fetchPhoneList();
@@ -33,11 +50,13 @@ export default function PhoneList() {
                     Liste des téléphones
                 </h2>
             </div>
+            {admin &&
             <div className="">
                 <Link className="" to="/create">
                     Créer un nouveau téléphone
                 </Link>
             </div>
+            }
             <div className="list__phone">
                 {phoneList.map((phone, key) => {
                     return (
