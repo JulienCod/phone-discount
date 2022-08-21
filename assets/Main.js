@@ -8,8 +8,7 @@ import Account from './pages/Account';
 import PhoneCreate from './pages/PhoneCreate';
 import PhoneList from './pages/PhoneList';
 import PhoneShow from './pages/PhoneShow';
-import Basket from './pages/basket';
-
+import Basket from './pages/Basket';
 
 AuthAPI.setup();
 

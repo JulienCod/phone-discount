@@ -16,7 +16,7 @@ export default function Header() {
                 </div>
                 <div>
                     <Link className='header__link' to='/'>
-                        <h1>Phone Discount</h1>
+                        <h1 className='header__title'>Phone Discount</h1>
                     </Link>
                 </div>
                 <nav className="container__icons">
