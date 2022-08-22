@@ -1,5 +1,5 @@
 // Ajouter un article
-function addPanier(product) {
+function addPanier (product) {
     let panier = getPanier();
     let foundProduct = panier.find(panier => panier.phoneId == product.phoneId && panier.color === product.color);
     if (foundProduct != undefined){
@@ -11,7 +11,7 @@ function addPanier(product) {
 }
 
 // consulte le local storage existant
-function getPanier() {
+function getPanier () {
     let panier = localStorage.getItem("panier");
     if (panier == null) {
         return [];
@@ -21,7 +21,7 @@ function getPanier() {
 }
 
 // enregistre le contenu dans le localstorage
-function savePanier(article){
+function savePanier (article){
     localStorage.setItem("panier", JSON.stringify(article));
 }
 

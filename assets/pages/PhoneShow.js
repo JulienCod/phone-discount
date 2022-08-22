@@ -56,20 +56,20 @@ export default function PhoneShow() {
     }
 
     return (
-        <div className="container">
+        <div className="container__show">
             <h2>Fiche détaillée du téléphone</h2>
             {loading ?
                 <Loader />
                 :
                 <div className="product__card">
-                    <div>
-                        <h3>{phone.brand} - {phone.model} - {phone.storage}Go - {phone.color} </h3>
-                    </div>
                     <div className="product__body">
                         <div className="product__img">
                             <img src={`http://localhost:8000/images/phone/${phone.imageName}`} alt="Image du téléphone" />
                         </div>
                         <div className="product__description">
+                            <div>
+                                <h3>{phone.brand} - {phone.model} - {phone.storage}Go - {phone.color} </h3>
+                            </div>
                             <b >Description:</b>
                             <p>{phone.description}</p>
                             <div>
