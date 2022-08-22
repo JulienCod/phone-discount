@@ -1,0 +1,33 @@
+.form{
+    box-shadow: 0px 0px 10px -1px rgba(128, 0, 0, 0.89);
+    margin:  1.5rem auto;
+    padding: 0.5rem 0rem 1.5rem 0rem ;
+    border-radius: 1rem;
+    max-width: 600px;
+}
+.input__field{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0rem 0rem;
+}
+.input__field>label{
+    display: flex;
+    padding: 0 2rem;
+}
+input{
+    padding:0.5rem;
+    border-radius: 1rem;
+    margin: auto;
+    flex:1 1 300px;
+    text-align: center;
+}
+.input__error{
+    margin: 0.5rem;
+    color: rgb(147, 14, 14);
+}
+.form__btn{
+    margin-top: 1rem;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}

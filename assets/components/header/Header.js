@@ -13,7 +13,7 @@ export default function Header() {
     const [countBasket, setCountBasket] = useState();
 
     useEffect(() => {
-        setCountBasket( basketApi.getPanier().length)
+        setCountBasket(basketApi.getPanier().length)
     }, []);
 
     const { isAuthenticated } = useContext(AuthContext);
@@ -40,25 +40,23 @@ export default function Header() {
                         <Link title='panier' className='header__link' to="/basket">
                             <RiShoppingBasketLine className="icons_header" />
                             {countBasket > 0 &&
-                            <div className='container__count'>
-                                <span className='count__basket'>{countBasket}</span>
-                            </div>
+                                <div className='container__count'>
+                                    <span className='count__basket'>{countBasket}</span>
+                                </div>
                             }
                         </Link>
                     </div>
                     {isAuthenticated &&
-                        <button>
-                            <BiLogOut onClick={async () => {
-                                authApi.logout();
-                                await Swal.fire({
-                                    icon: 'success',
-                                    title: 'Vous êtes désormais déconnecté !',
-                                    showConfirmButton: false,
-                                    timer: 1500,
-                                });
-                                window.location.reload();
-                            }} className="icons_header" />
-                        </button>
+                        <BiLogOut onClick={async () => {
+                            authApi.logout();
+                            await Swal.fire({
+                                icon: 'success',
+                                title: 'Vous êtes désormais déconnecté !',
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            window.location.reload();
+                        }} className="icons_header" />
                     }
                 </nav>
             </div>

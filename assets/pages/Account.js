@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ConnectAccount from '../components/form/connect/ConnectAccount';
 import CreateAccount from '../components/form/create/CreateAccount';
-
+import Button from '../components/button/Button';
+import '../styles/account.css';
 export default function Account() {
 
     const [newAccount, setNewAccount] = useState();
@@ -9,21 +10,22 @@ export default function Account() {
 
     return (
         <article className="container">
-            <div>
-                <button onClick={() => {
+            <div className='container__btn'>
+                <Button onClick={() => {
                     setNewAccount(true);
                     setConnectAccount(false)
-                }}>Créer un compte</button>
-                <button onClick={() => {
+                }}>Créer un compte</Button>
+
+                <Button onClick={() => {
                     setNewAccount(false)
                     setConnectAccount(true)
-                }}>Se connecter</button>
+                }}>Se connecter</Button>
             </div>
             {newAccount &&
-                <CreateAccount/>
+                <CreateAccount />
             }
             {connectAccount &&
-                <ConnectAccount/>
+                <ConnectAccount />
             }
         </article>
     )

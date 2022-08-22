@@ -1,7 +1,11 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import usersApi from '../../../services/usersApi';
+import '../../../styles/form.css';
+import Button from '../../button/Button';
+import { createAccount } from '../../../services/formValidation';
 
 export default function CreateAccount() {
 
@@ -33,7 +37,7 @@ export default function CreateAccount() {
         }
     };
     const { register, handleSubmit, formState: { errors } } = useForm({
-        // resolver: joiResolver(?Schema)
+        resolver: joiResolver(createAccount)
     });
     const onSubmit = data => {
         let user = {
@@ -58,8 +62,8 @@ export default function CreateAccount() {
                         type="email"
                         placeholder="Adresse email"
                         {...register("email")} />
-                    <span className="input__error">{errors.email?.message}</span>
                 </label>
+                <span className="input__error">{errors.email?.message}</span>
             </div>
 
             <div className="input__field">
@@ -69,8 +73,8 @@ export default function CreateAccount() {
                         type="password"
                         placeholder="Mot de passe"
                         {...register("password")} />
-                    <span className="input__error">{errors.password?.message}</span>
                 </label>
+                <span className="input__error">{errors.password?.message}</span>
             </div>
 
             <div className="input__field">
@@ -80,8 +84,8 @@ export default function CreateAccount() {
                         type="text"
                         placeholder="Nom"
                         {...register("firstname")} />
-                    <span className="input__error">{errors.firstname?.message}</span>
                 </label>
+                <span className="input__error">{errors.firstname?.message}</span>
             </div>
 
             <div className="input__field">
@@ -91,8 +95,8 @@ export default function CreateAccount() {
                         type="text"
                         placeholder="Prénom"
                         {...register("lastname")} />
-                    <span className="input__error">{errors.lastname?.message}</span>
                 </label>
+                <span className="input__error">{errors.lastname?.message}</span>
             </div>
 
             <div className="input__field">
@@ -103,24 +107,27 @@ export default function CreateAccount() {
                         placeholder="Adresse postale"
                         {...register("address")}
                     />
-                    <span className="input__error">{errors.address?.message}</span>
                 </label>
+                <span className="input__error">{errors.address?.message}</span>
             </div>
 
             <div className="input__field">
                 <label htmlFor='postal_code'>
                     <input
+                        className='input__number'
                         id='postal_code'
                         type="number"
                         placeholder="Code postal"
                         {...register("postal_code")}
                     />
-                    <span className="input__error">{errors.postal_code?.message}</span>
                 </label>
+                <span className="input__error">{errors.postal_code?.message}</span>
             </div>
 
             <div className="input__field">
                 <label htmlFor='rgpd'>
+                    <div>
+
                     RGPD :
                     <input
                         id='rgpd'
@@ -128,12 +135,13 @@ export default function CreateAccount() {
                         placeholder="RGPD"
                         {...register("rgpd")}
                     />
-                    <span className="input__error">{errors.rgpd?.message}</span>
+                    </div>
                 </label>
+                <span className="input__error">{errors.rgpd?.message}</span>
             </div>
 
             <div>
-                <button>Créer un compte</button>
+                <Button>Créer un compte</Button>
             </div>
         </form>
     )
