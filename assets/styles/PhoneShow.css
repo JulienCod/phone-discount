@@ -1,24 +1,26 @@
 .container{
     padding:0.5rem;
 }
-
-.btn__home{
-
+.product__description{
+    padding: 1rem;
 }
 
-.title__h2{
-
+#quantity{
+    margin:1rem;
 }
-
-.product-card{
-
-}
-
-.product-header{
-
-}
-
-.product-img > img{
+.product__img > img{
     width: 100%;
     max-width: 600px;
+}
+
+@media screen and (min-width: 800px){
+    .product__card{
+        max-width:1000px;
+        margin: auto;
+    }
+    .product__body{
+        display:flex;
+        justify-content: space-between;
+    }
+    
 }
