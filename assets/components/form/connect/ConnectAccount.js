@@ -6,11 +6,7 @@ import AuthContext from '../../../context/AuthContext';
 
 export default function ConnectAccount() {
     const { setIsAuthenticated } = useContext(AuthContext);
-    const [user, setUser] = useState({
-        username: "",
-        password: ""
-    });
-    const handleSave = async () => {
+    const handleSave = async (user) => {
         try {
             await AuthApi.authenticate(user);
             setIsAuthenticated(true);
@@ -33,11 +29,11 @@ export default function ConnectAccount() {
         // resolver: joiResolver(?Schema)
     });
     const onSubmit = data => {
-        setUser({
+        let user ={
             username: data.email,
             password: data.password,
-        })
-        handleSave();
+        }
+        handleSave(user);
     }
     return (
         <form className="form" onSubmit={handleSubmit(onSubmit)}>

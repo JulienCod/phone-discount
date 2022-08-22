@@ -40,18 +40,19 @@ export default function PhoneShow() {
     const { register, handleSubmit, formState: { errors } } = useForm({
         // resolver: joiResolver(?Schema)
     });
-    const onSubmit = data => {
+    const onSubmit = async data => {
         let order = {
             phoneId: data.phoneId,
             quantity: data.quantity,
         }
         basketApi.addPanier(order);
-        Swal.fire({
+        await Swal.fire({
             icon: 'success',
             title: 'Téléphone ajouté au panier!',
             showConfirmButton: false,
             timer: 1500,
         });
+        window.location.reload();
     }
 
     return (

@@ -3,7 +3,6 @@ import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import '../../styles/cardPhone.css'
 
-
 export default function CardPhone( props ) {
     const {data} = props;
     const [currentItems, setCurrentItems] = useState([]);

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/PhoneList.css';
-import AuthAPI from '../services/authApi';
+import authAPI from '../services/authApi';
 import AuthContext from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import Loader from '../components/loader/loader';
@@ -16,7 +16,7 @@ export default function PhoneList() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            let user = AuthAPI.rolesCurrentUser();
+            let user = authAPI.rolesCurrentUser();
             if (user === "ROLE_ADMIN") {
                 setAdmin(true);
             } else {
