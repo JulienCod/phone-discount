@@ -1,0 +1,87 @@
+.pagination{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    font-size: 1rem;
+    gap:5px;
+    padding: 0;
+}
+
+.pagination .page-num{
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+}
+
+.pagination .page-num:hover{
+    background-color: blue;
+    color: #fff;
+}
+
+.pagination .active{
+    background-color: blue;
+}
+
+.list__phone {
+    border-top: 1px solid #dcdcdc;
+}
+
+.item {
+    display: flex;
+    margin:2rem auto;
+    max-width: 600px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.item__img > img {
+    width: 100%;
+    max-width: 400px;
+}
+
+.item__price > span {
+    display: block;
+}
+
+.item__promo--percent {
+    background: #f4511d;
+    border-radius: 50%;
+    color: #fff;
+    float: right;
+    font-size: 1rem;
+    font-weight: 700;
+    height:2.5rem;
+    line-height: 2.5rem;
+    position: relative;
+    text-align: center;
+    top: -1px;
+    width: 2.5rem;
+}
+
+.item__price--old {
+    color: #999;
+    text-decoration: line-through;
+}
+
+@media screen and (min-width: 800px)  {
+    .list__phone {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .item {
+        flex:1 1 50%
+    }
+    .pagination{
+        font-size: 1.2rem;
+    }
+
+}
+
+@media screen and (min-width:1200px){
+    .item {
+        max-width: 600px;
+        flex:1 1 calc(100% / 3)
+    }
+}

@@ -8,12 +8,15 @@ body {
     margin:auto;
 }
 h1{
-    font-size: 1.7rem;
+    font-size: 1.8rem;
 }
 h2{
-    font-size: 1.35rem;
+    font-size: 1.4rem;
 }
 h3{
+    font-size: 1.2rem;
+}
+p{
     font-size: 1rem;
 }
 @media screen and (min-width:800px) {
@@ -25,6 +28,9 @@ h3{
     }
     h3{
         font-size: 1.75rem;
+    }
+    p{
+        font-size: 1.2rem;
     }
 }
 

@@ -6,6 +6,7 @@ import AuthAPI from '../services/authApi';
 import AuthContext from '../context/AuthContext';
 import Swal from 'sweetalert2';
 import Loader from '../components/loader/loader';
+import CardPhone from '../components/cardPhone/CardPhone';
 
 export default function PhoneList() {
     const [phoneList, setPhoneList] = useState([]);
@@ -46,13 +47,8 @@ export default function PhoneList() {
             });
     }
 
-    const newPrice = (price, percent) => {
-        const newPrice = Math.round(price - (price * (percent / 100)));
-        return newPrice
-    }
-
     return (
-        <article className="container">
+        <article>
             <div>
                 <h2 className="title__h2">
                     Liste des téléphones
@@ -63,7 +59,7 @@ export default function PhoneList() {
                 :
                 <>
                     {admin &&
-                        <div className="">
+                        <div >
                             <Link className="" to="/create">
                                 Créer un nouveau téléphone
                             </Link>
@@ -76,47 +72,8 @@ export default function PhoneList() {
                             `${phoneList.length} produits`
                         }
                     </div>
-                    <div className="list__phone">
-                        {phoneList.map((phone, key) => {
-                            return (
-                                <div className="item" key={key}>
-                                    <Link className="" to={`/show/${phone.id}`}>
-                                        <div className="item__img">
-                                            <img src={`http://localhost:8000/images/phone/${phone.imageName}`} alt="image téléphone" />
-                                        </div>
-                                    </Link>
-                                    <div className='item__content'>
-                                        <h3 className="item__title">
-                                            {phone.brand} - {phone.model} - {phone.storage} Go - {phone.color}
-                                        </h3>
-                                        <p className="item__description">{phone.description}</p>
-                                        <div>
-                                            <p className="item__price">
-                                                {phone.promotion > 0 ?
-                                                    <>
-                                                        <span className='item__promo--percent'>
-                                                            -{phone.promotion}%
-                                                        </span>
 
-                                                        <span className='item__price--old'>
-                                                            {phone.price} €
-                                                        </span>
-                                                        <span className='item__price--new'>
-                                                            {newPrice(phone.price, phone.promotion)} €
-                                                        </span>
-                                                    </>
-                                                    :
-                                                    <span className='item__price--new'>
-                                                        {newPrice(phone.price, phone.promotion)} €
-                                                    </span>
-                                                }
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
+                    <CardPhone data={phoneList}/>
                 </>
             }
         </article>
