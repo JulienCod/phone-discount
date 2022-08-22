@@ -3,7 +3,7 @@ header{
 }
 .container__header{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     max-width: 1900px;
     padding: 0.5rem;
     align-items: center;

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../styles/PhoneList.css';
 import authAPI from '../services/authApi';
 import AuthContext from '../context/AuthContext';
 import Swal from 'sweetalert2';
@@ -50,7 +49,7 @@ export default function PhoneList() {
     return (
         <article>
             <div>
-                <h2 className="title__h2">
+                <h2>
                     Liste des téléphones
                 </h2>
             </div>
@@ -60,12 +59,12 @@ export default function PhoneList() {
                 <>
                     {admin &&
                         <div >
-                            <Link className="" to="/create">
+                            <Link to="/create">
                                 Créer un nouveau téléphone
                             </Link>
                         </div>
                     }
-                    <div className='count__item'>
+                    <div>
                         {phoneList.length <= 1 ?
                             `${phoneList.length} produit`
                             :

@@ -141,6 +141,9 @@ export default function Basket() {
                 <Loader />
                 :
                 <div>
+                    {storage.length <= 0?
+                    <div className="message__basket">Le panier est vide !</div>
+                    :
                     <form className='form__basket' onSubmit={handleSubmit(onSubmit)}>
                         {phoneList.map((phone) => {
                             for (const storagePhone of storage) {
@@ -221,6 +224,7 @@ export default function Basket() {
                             <Button onClick={validation}>Je passe ma commande</Button>
                         </div>
                     </form>
+                    }
                 </div>
             }
         </article>

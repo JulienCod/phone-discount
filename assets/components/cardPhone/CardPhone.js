@@ -37,7 +37,7 @@ export default function CardPhone( props ) {
                                             <img src={`http://localhost:8000/images/phone/${phone.imageName}`} alt="image téléphone" />
                                         </div>
                                     </Link>
-                                    <div>
+                                    <div className="list__phone__desc">
                                         <h3>
                                             {phone.brand} - {phone.model} - {phone.storage} Go - {phone.color}
                                         </h3>
