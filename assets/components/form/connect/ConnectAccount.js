@@ -21,7 +21,7 @@ export default function ConnectAccount() {
                 showConfirmButton: false,
                 timer: 1500,
             });
-            window.location.href = "/";
+            window.history.back();
         } catch (error) {
             Swal.fire({
                 icon: 'error',

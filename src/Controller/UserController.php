@@ -26,43 +26,6 @@ class UserController extends AbstractController
         $this->userPasswordHasher = $userPasswordHasher;
 
     }
-    // /**
-    //  * get phones
-    //  *
-    //  * @return Response
-    //  */
-    // #[Route('/phone', name: 'phone_index', methods: ['GET'])]
-    // public function index(): Response
-    // {
-    //     $phones = $this->entityManager->getRepository(Phones::class)->findAll();
-    //     $data = [];
-    //     foreach ($phones as $phone) {
-    //         $data[] = [
-    //             'id' => $phone->getId(),
-    //             'brand' => $phone->getBrand(),
-    //             'description' => $phone->getDescription(),
-    //             'model' => $phone->getModel(),
-    //             'color' => $phone->getColor(),
-    //             'storage' => $phone->getStorage(),
-    //             'stock'=>$phone->getStock(),
-    //             'price' => $phone->getPrice(),
-    //             'promotion' => $phone->getPromotion(),
-    //             'imageName'=>$phone->getImageName(),
-    //             // 'is_active' => $phone->getIsActive(),
-    //         ];
-    //     }
-    //     return $this->json($data);
-    // }
-
-    // #[Route('/login_check', name: 'user_login', methods: ['POST'])]
-    // public function login(Request $request): Response
-    // {
-    //     $user = $this->getUser($request->request->get('email'));
-    //     dd($user);
-    //     return $this->json([
-    //         'roles' => $user->getRoles(),
-    //     ]);
-    // }
     #[Route('/user', name: 'user_create', methods: ['POST'])]
     public function create(Request $request): Response
     {
@@ -82,32 +45,6 @@ class UserController extends AbstractController
         return $this->json('Created new user successfully');
     }
 
-    // /**
-    //  * get a product
-    //  */
-    // #[Route('/user/{id}', name: 'phone_show', methods: ['GET'])]
-    // public function show(Request $request): Response
-    // {
-    //     $id = (['id' => $request->get('id')]);
-    //     $phone = $this->entityManager->getRepository(Phones::class)->find($id);
-    //     if (!$phone) {
-    //         return $this->json('No phone found for id ' . $id, 404);
-    //     }
-    //     $data[] = [
-    //         'id' => $phone->getId(),
-    //         'brand' => $phone->getBrand(),
-    //         'description' => $phone->getDescription(),
-    //         'model' => $phone->getModel(),
-    //         'color' => $phone->getColor(),
-    //         'storage' => $phone->getStorage(),
-    //         'stock'=>$phone->getStock(),
-    //         'price' => $phone->getPrice(),
-    //         'promotion' => $phone->getPromotion(),
-    //         'is_active' => $phone->isIsActive(),
-    //         'imageName'=>$phone->getImageName(),
-    //     ];
-    //     return $this->json($data);
-    // }
 
     /**
      * update a phone

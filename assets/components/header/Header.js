@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import '../../styles/header.css';
 import { RiAccountCircleLine, RiShoppingBasketLine } from 'react-icons/Ri'
 import { BiArrowBack, BiLogOut } from 'react-icons/Bi'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import authApi from '../../services/authApi';
 import AuthContext from '../../context/AuthContext';
 import basketApi from '../../services/basketApi';
@@ -37,14 +37,25 @@ export default function Header() {
                         </Link>
                     </div>
                     <div>
-                        <Link title='panier' className='header__link' to="/basket">
+                        {isAuthenticated?
+                        <Link title='panier' className='header__link' to="/basket" >
                             <RiShoppingBasketLine className="icons_header" />
                             {countBasket > 0 &&
                                 <div className='container__count'>
-                                    <span className='count__basket'>{countBasket}</span>
+                                <span className='count__basket'>{countBasket}</span>
                                 </div>
                             }
                         </Link>
+                            : 
+                        <Link title='panier' className='header__link' to="/account" >
+                            <RiShoppingBasketLine className="icons_header" />
+                            {countBasket > 0 &&
+                                <div className='container__count'>
+                                <span className='count__basket'>{countBasket}</span>
+                                </div>
+                            }
+                        </Link>
+                        }
                     </div>
                     {isAuthenticated &&
                         <BiLogOut onClick={async () => {
@@ -55,7 +66,7 @@ export default function Header() {
                                 showConfirmButton: false,
                                 timer: 1500,
                             });
-                            window.location.reload();
+                            location.href='/';
                         }} className="icons_header" />
                     }
                 </nav>

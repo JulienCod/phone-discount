@@ -1,7 +1,6 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
-
 /**
  * Déconnexion (suppression du token du sessionStorage et sur Axios)
  */
@@ -14,7 +13,7 @@ function logout() {
  * Requête HTTP d'authentification et stockage du token dans le storage et sur Axios
  * @param {object} user
  */
-function authenticate(user) {
+function authenticate (user) {
     return axios
         .post('/api/login', user)
         .then(response => response.data.token)

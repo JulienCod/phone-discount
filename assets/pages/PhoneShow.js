@@ -15,22 +15,27 @@ export default function PhoneShow() {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`/api/phone/${id}`)
-            .then(function (response) {
-                const data = response.data[0];
-                setPhone(data);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setLoading(false);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Une erreur est survenue',
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
+        fechtPhone()
+        .then(function (response) {
+            const data = response.data[0];
+            setPhone(data);
+            setLoading(false);
+        })
+        .catch(function (error) {
+            setLoading(false);
+            Swal.fire({
+                icon: 'error',
+                title: 'Une erreur est survenue',
+                showConfirmButton: false,
+                timer: 2000,
             });
+            location.href='/';
+        });
     }, []);
+
+    const fechtPhone = async () => {
+        return await axios.get(`/api/phone/${id}`)
+    }
 
     const newPrice = (price, percent) => {
         const newPrice = Math.round(price - (price * (percent / 100)));

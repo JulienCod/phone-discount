@@ -25,4 +25,9 @@ function savePanier (article){
     localStorage.setItem("panier", JSON.stringify(article));
 }
 
-export default {addPanier, getPanier, savePanier}
+//supprime le panier du local storage
+function deletePanier(){
+    localStorage.removeItem("panier");
+}
+
+export default {addPanier, getPanier, savePanier, deletePanier}

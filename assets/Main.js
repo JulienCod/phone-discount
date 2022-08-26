@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthContext from './context/AuthContext';
@@ -16,6 +16,18 @@ function Main() {
     const [isAuthenticated, setIsAuthenticated] = useState(
         AuthAPI.isAuthenticated()
     );
+    const [admin, setAdmin] = useState(false);
+    useEffect(() => {
+        if (isAuthenticated) {
+            let user = AuthAPI.rolesCurrentUser();
+            if (user === "ROLE_ADMIN") {
+                setAdmin(true);
+            } else {
+                setAdmin(false);
+            }
+        }
+    }, [isAuthenticated]);
+
     return (
         <AuthContext.Provider
             value={{
@@ -27,10 +39,15 @@ function Main() {
                 <Layout>
                     <Routes>
                         <Route path="/" element={<PhoneList />} />
-                        <Route path="/create" element={<PhoneCreate />} />
-                        <Route path="/show/:id" element={<PhoneShow />} />
-                        <Route path="/account" element={<Account />} /> 
-                        <Route path="/basket" element={<Basket />} /> 
+                        {admin &&
+                            <Route path="create" element={<PhoneCreate />} />
+                        }
+                        <Route path="show/:id" element={<PhoneShow />} />
+                        <Route path="account" element={<Account />} />
+                        {isAuthenticated &&
+                            <Route path="basket" element={<Basket />} />
+                        }
+                        <Route path="*" element={<PhoneList />} />
                     </Routes>
                 </Layout>
             </Router>

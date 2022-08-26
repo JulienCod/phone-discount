@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
@@ -15,10 +17,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    #[Assert\NotBlank()]
+    #[Assert\Email()]
+    #[Assert\Length(min:2, max: 180)]
+    private string $email;
 
     #[ORM\Column]
     private array $roles = [];
@@ -27,30 +32,41 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    #[Assert\NotBlank()]
+    private string $password;
 
     #[ORM\Column(length: 255)]
-    private ?string $firstname = null;
+    #[Assert\NotBlank()]
+    #[Assert\Length(min:2, max: 50)]
+    private string $firstname;
 
     #[ORM\Column(length: 255)]
-    private ?string $lastname = null;
+    #[Assert\NotBlank()]
+    #[Assert\Length(min:2, max: 50)]
+    private string $lastname;
 
     #[ORM\Column(length: 255)]
-    private ?string $address = null;
+    #[Assert\NotBlank()]
+    #[Assert\Length(min:2, max: 255)]
+    private string $address;
 
     #[ORM\Column]
-    private ?int $postal_code = null;
+    #[Assert\NotNull()]
+    private int $postal_code;
 
     #[ORM\Column]
-    private ?bool $is_active = null;
+    private bool $is_active;
 
     #[ORM\Column]
-    private ?bool $rgpd = null;
+    #[Assert\NotNull()]
+    private bool $rgpd;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Command::class, orphanRemoval: true)]
@@ -245,25 +261,4 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->command;
     }
 
-    public function addCommand(Command $command): self
-    {
-        if (!$this->command->contains($command)) {
-            $this->command->add($command);
-            $command->setUsers($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommand(Command $command): self
-    {
-        if ($this->command->removeElement($command)) {
-            // set the owning side to null (unless already changed)
-            if ($command->getUsers() === $this) {
-                $command->setUsers(null);
-            }
-        }
-
-        return $this;
-    }
 }

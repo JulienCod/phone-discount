@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import phoneApi from '../services/phoneApi';
-// import { joiResolver } from '@hookform/resolvers/joi';
 
 
 export default function PhoneCreate() {
@@ -74,6 +73,7 @@ export default function PhoneCreate() {
         <h2>Ajouter un téléphone</h2>
         <div className="input__field">
           <input
+            className="input__create"
             type="text"
             placeholder="Marque"
             {...register("brand")} />
@@ -81,6 +81,7 @@ export default function PhoneCreate() {
         </div>
         <div className="input__field">
           <input
+            className="input__create"
             type="text"
             placeholder="Modèle"
             {...register("model")} />
@@ -89,6 +90,7 @@ export default function PhoneCreate() {
 
         <div className="input__field">
           <input
+            className="input__create"
             type="text"
             placeholder="Couleur"
             {...register("color")} />
@@ -96,6 +98,7 @@ export default function PhoneCreate() {
         </div>
         <div className="input__field">
           <input
+            className="input__create"
             type="text"
             placeholder="Description"
             {...register("description")} />
@@ -104,6 +107,7 @@ export default function PhoneCreate() {
 
         <div className="input__field">
           <input
+            className="input__create"
             type="number"
             placeholder="Capacité de stockage"
             {...register("storage")}
@@ -113,6 +117,7 @@ export default function PhoneCreate() {
 
         <div className="input__field">
           <input
+            className="input__create"
             type="number"
             placeholder="Stock"
             {...register("stock")}
@@ -122,6 +127,7 @@ export default function PhoneCreate() {
 
         <div className="input__field">
           <input
+            className="input__create"
             type="number"
             placeholder="Prix"
             {...register("price")}
@@ -131,6 +137,7 @@ export default function PhoneCreate() {
 
         <div className="input__field">
           <input
+            className="input__create"
             type="number"
             placeholder="Pourcentage de promotion"
             {...register("promotion")}
@@ -140,6 +147,7 @@ export default function PhoneCreate() {
 
         <div className="input__field">
           <input
+          className="input__create"
             type="checkbox"
             placeholder="Pourcentage de promotion"
             {...register("is_active")}
@@ -150,7 +158,7 @@ export default function PhoneCreate() {
         <div className="input__field">
           <div className="">
             <input
-              className=""
+              className="input__create"
               type="file"
               name='imageName'
               id='imageName'

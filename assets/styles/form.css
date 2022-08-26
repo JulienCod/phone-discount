@@ -21,6 +21,9 @@ input{
     flex:1 1 300px;
     text-align: center;
 }
+.input__create{
+    flex:auto;
+}
 .input__error{
     margin: 0.5rem;
     color: rgb(147, 14, 14);

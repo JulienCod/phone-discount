@@ -3,9 +3,9 @@ header{
 }
 .container__header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     max-width: 1900px;
-    padding: 0.5rem;
+    padding: 0.5rem ;
     align-items: center;
     margin:auto;
 }
